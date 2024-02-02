@@ -1,0 +1,40 @@
+#navbar {
+    display: flex;
+    flex-direction: row;
+    background-color: #181818;
+    width: 100vw;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#rightButtons {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: center;
+}
+
+#homeButton,
+#loginButton,
+#registerButton {
+
+
+    background:none;
+    font-size: x-large;
+    height: 50px;
+    width: 100px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
+
+#homeButton:hover,
+#registerButton:hover,
+#loginButton:hover {
+    color: #d38080;
+    transition: color 300ms linear;
+}
