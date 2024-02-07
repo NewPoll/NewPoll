@@ -1,11 +1,14 @@
 import './NavBar.css'
+import { Link } from "react-router-dom";
+
 function Navbar () {
     return (
         <div id="navbar">
-            <button id="homeButton"> NewPoll </button >
+            <Link to={"/"}> <button id="homeButton"> NewPoll </button > </Link>
+           
             <div id="rightButtons">
-                <button id="loginButton"> Login </button >
-                <button id="registerButton"> Register </button>
+                <Link to={"/login"}> <button id="loginButton"> Login </button > </Link>
+                <Link to={"/register"}> <button id="registerButton"> Register </button > </Link>
             </div>
 
 
