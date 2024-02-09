@@ -1,3 +1,59 @@
 #registerSlogan {
     color:white;
 }
+
+#registerBackground{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    text-align: center;
+}
+
+#registerForm{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    color: white;
+    border: 1px solid white;
+    align-items: center;
+    text-align: left;
+    padding: 30px 10px 100px 10px;
+}
+
+.registerInputs{
+    font-size: x-large;
+    border: none;
+    outline: none;
+    width: 85%;
+    height: 50px;
+    background-color: #766B6B;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.registerInputs::placeholder {
+    font-size: x-large;
+    color: rgb(173, 173, 173);
+    opacity: 1;
+  }
+
+#logo{
+    max-width: 50%;
+    max-height: 50%;
+    margin-bottom: 50px;
+}
+
+#signUpButton{
+    cursor: pointer;
+    color: white;
+    border-radius: 500px;
+    margin-top: 30px;
+    font-size: large;
+    border: none;
+    background-color: #FE6969;
+    outline: none;
+    height: 50px;
+    width: 200px;
+}

@@ -8,7 +8,6 @@ function Home () {
             <Navbar/>
             <div id="pollFormContainer">
                 <PollForm/>
-                
             </div>
         </>
     

@@ -1,14 +1,15 @@
 import './NavBar.css'
 import { Link } from "react-router-dom";
+import "../images/NavbarLogo.png";
 
 function Navbar () {
     return (
         <div id="navbar">
-            <Link to={"/"}> <button id="homeButton"> NewPoll </button > </Link>
+            <Link to={"/"}> <img id="homeButton" alt="logo" src={require("../images/NavbarLogo.png")}/> </Link>
            
             <div id="rightButtons">
-                <Link to={"/login"}> <button id="loginButton"> Login </button > </Link>
-                <Link to={"/register"}> <button id="registerButton"> Register </button > </Link>
+                <button id="loginButton"> <Link to={"/login"} id="loginButton">Login</Link> </button>
+                <button id="registerButton"> <Link to={"/register"} id="registerButton">Register</Link> </button>
             </div>
 
 
