@@ -57,3 +57,9 @@
     height: 50px;
     width: 200px;
 }
+
+#signUpButton:hover {
+    background-color: #580404;
+    transition: background-color 100ms linear;
+  
+  }
