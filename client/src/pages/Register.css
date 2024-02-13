@@ -63,3 +63,13 @@
     transition: background-color 100ms linear;
   
   }
+
+#unequalPasswords, #usernameExists{
+    color: red;
+    font-size: large;
+}
+
+#accountRegistered{
+    color: green;
+    font-size: large;
+}
