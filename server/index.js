@@ -21,9 +21,12 @@ mongoose.connect(process.env.URI)
 
 app.post("/verifyLogin", async function(req, res){
     const {username, password} = req.body;
-    console.log(username);
-    console.log(password);
-    res.send("Hello");
+    try{
+        const token = await User.signin(username, password);
+        res.status(200).json({token: token});
+    } catch(e){
+        res.status(401).json({error: e})
+    }
 })
 
 app.post("/verifyRegister", async function(req, res){
