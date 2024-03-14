@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
 const jwt = require('jsonwebtoken')
+
 const usersSchema = new Schema({
     username: {
         type: String,
@@ -49,7 +50,7 @@ usersSchema.statics.signin = async function(username, password){
     if(!user){
         throw Error("This user does not exist");
     }
-    const match = await bcrypt.compare(password,user.passwordHash);
+    const match = await bcrypt.compare(password, user.passwordHash);
     if (!match) {
         throw Error("Incorrect password");
     }
