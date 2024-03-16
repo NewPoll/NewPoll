@@ -2,26 +2,18 @@ import Navbar from "../components/NavBar.js";
 import "./Login.css";
 import { useState } from 'react';
 import axios from 'axios';
-
+import {useSignin} from '../hooks/useSignin.js'
 function Login () {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const {signin, error, isLoading} = useSignin()
+  
 
-    function handleLogin(event){
+    const handleLogin = async (event) => {
         event.preventDefault();
+
+        await signin(username,password)
         
-        axios({
-            method: 'post',
-            url: 'http://localhost:5000/verifyLogin',
-            data: {
-              "username": username,
-              "password": password
-            }
-        }).then(function(res){
-            console.log(res)
-        }).catch(function (e){
-            console.log(e)
-        });
     }
 
     return (
@@ -32,7 +24,8 @@ function Login () {
                     <img id="logo" alt="logo" src={require("../images/NewPollLogo.png")}/>
                     <input className="signInInputs" type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} value={username}/>
                     <input className="signInInputs" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                    <button type="submit" id="signInButton">Sign In</button>
+                    <button disabled={isLoading} type="submit" id="signInButton">Sign In</button>
+                    {error && <p id='responseError'> {error}</p>}
                 </form>
             </div>
         </>

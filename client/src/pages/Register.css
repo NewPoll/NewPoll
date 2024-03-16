@@ -64,12 +64,12 @@
   
   }
 
-#unequalPasswords, #usernameExists{
+#responseError{
     color: red;
     font-size: large;
 }
 
-#accountRegistered{
+#responseGood{
     color: green;
     font-size: large;
 }

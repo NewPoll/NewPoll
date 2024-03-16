@@ -60,3 +60,7 @@
     transition: background-color 100ms linear;
   
   }
+#responseError{
+    color: red;
+    font-size: large;
+}

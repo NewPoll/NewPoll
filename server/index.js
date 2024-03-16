@@ -19,22 +19,22 @@ mongoose.connect(process.env.URI)
         console.log(error)
     });
 
-app.post("/verifyLogin", async function(req, res){
+app.post("/api/user/login", async function(req, res){
     const {username, password} = req.body;
     try{
         const token = await User.signin(username, password);
-        res.status(200).json({token: token});
+        res.status(200).json({username: username, token: token});
     } catch(e){
-        res.status(401).json({error: e})
+        res.status(400).json({error: e.message})
     }
 })
 
-app.post("/verifyRegister", async function(req, res){
-    const {username, password} = req.body;
+app.post("/api/user/register", async function(req, res){
+    const {username, password , confirmPassword} = req.body;
     try{
-        const user = await User.signup(username, password);
-        res.status(200).json({username, password});
+        const token = await User.signup(username, password,confirmPassword);
+        res.status(200).json({username: username, token: token});
     } catch(e){
-        res.status(401).json({error: e})
+        res.status(400).json({error: e.message})
     }
 })

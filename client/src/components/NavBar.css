@@ -16,7 +16,8 @@
 }
 
 #loginButton,
-#registerButton {
+#registerButton,
+#logoutButton {
     background:none;
     font-size: x-large;
     height: 20px;
@@ -27,6 +28,20 @@
     margin-left: 10px;
     margin-right: 50px;
     text-decoration: none;
+    text-wrap: nowrap;
+}
+
+#username {
+    background:none;
+    font-size: x-large;
+    height: 27px;
+   
+    border: none;
+    color: white;
+    margin-left: 10px;
+    margin-right: 50px;
+    text-decoration: none;
+    text-wrap: nowrap;
 }
 
 #registerButton{

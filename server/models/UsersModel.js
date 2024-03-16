@@ -20,10 +20,16 @@ const createToken = (_id) => {
     return jwt.sign({_id},process.env.SECRET, {expiresIn: '3d'})
 }
 
-usersSchema.statics.signup = async function(username, password){
-    if (!username || !password) {
-        throw Error("Both fields must be complete");
+usersSchema.statics.signup = async function(username, password , confirmPassword){
+    if (!username || !password || !confirmPassword ){
+        throw Error("All fields must be complete");
     }
+    if (password!==confirmPassword) {
+        console.log(password)
+        console.log(confirmPassword)
+        throw Error("Password and Confirm Password do not match");
+    }
+
 
     const exists = await this.findOne({ username });
 
@@ -35,8 +41,12 @@ usersSchema.statics.signup = async function(username, password){
     const hash = await bcrypt.hash(password, salt);
 
     const user = this.create({username, passwordHash: hash});
+    
+    const token = createToken(user._id)
 
-    return user;
+    
+
+    return token;
 }
 
 
