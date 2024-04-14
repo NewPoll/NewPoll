@@ -3,17 +3,19 @@ import "./Login.css";
 import { useState } from 'react';
 import axios from 'axios';
 import {useSignin} from '../hooks/useSignin.js'
+import { useNavigate } from 'react-router-dom';
+
 function Login () {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const {signin, error, isLoading} = useSignin()
+    const {signin, error, isLoading, success} = useSignin();
+    const navigate = useNavigate();
   
 
     const handleLogin = async (event) => {
         event.preventDefault();
 
         await signin(username,password)
-        
     }
 
     return (
@@ -26,6 +28,7 @@ function Login () {
                     <input className="signInInputs" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                     <button disabled={isLoading} type="submit" id="signInButton">Sign In</button>
                     {error && <p id='responseError'> {error}</p>}
+                    {success && navigate("/")}
                 </form>
             </div>
         </>

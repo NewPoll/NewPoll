@@ -13,8 +13,48 @@ const usersSchema = new Schema({
     passwordHash: {
         type: String,
         required: true
+    },
+    polls: {
+        type: Array,
+        required: true
     }
 })
+
+const pollSchema = new Schema({
+    id: {
+        type: String,
+        required: true
+    },
+    question: {
+        type: String,
+        required: true
+    },
+    optionsCount: {
+        type: Number,
+        required: true
+    },
+    options: {
+        type: Array,
+        required: true
+    },
+    votes: {
+        type: Array,
+        required: true
+    },
+    showResults: {
+        type: Boolean,
+        required: true
+    },
+    oneVotePerIP: {
+        type: Boolean,
+        required: true
+    },
+    multipleOptions: {
+        type: Boolean,
+        required: true
+    }
+})
+
 
 const createToken = (_id) => {
     return jwt.sign({_id},process.env.SECRET, {expiresIn: '3d'})
@@ -40,7 +80,7 @@ usersSchema.statics.signup = async function(username, password , confirmPassword
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const user = this.create({username, passwordHash: hash});
+    const user = this.create({username, passwordHash: hash, polls: []});
     
     const token = createToken(user._id)
 

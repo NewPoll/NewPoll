@@ -44,7 +44,8 @@
     text-wrap: nowrap;
 }
 
-#registerButton{
+#registerButton,
+#logoutButton{
     margin-right: 100px !important;
 }
 
@@ -57,7 +58,8 @@
 
 #homeButton:hover,
 #registerButton:hover,
-#loginButton:hover {
+#loginButton:hover,
+#logoutButton:hover {
     color: #d38080;
     transition: color 300ms linear;
 }

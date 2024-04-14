@@ -4,12 +4,15 @@ import { useState } from 'react';
 import "../images/NewPollLogo.png";
 import { useSignup } from "../hooks/useSignup.js";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register () {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const {signup,error, isLoading,success} = useSignup()
+    const navigate = useNavigate();
+
     const handleRegister = async (event) => {
         event.preventDefault();
 
@@ -32,7 +35,7 @@ function Register () {
                     <input className="registerInputs" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                     <input className="registerInputs" type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword}/>
                     {error && <p id='responseError'> {error}</p>}
-                    {success && <p id = 'responseGood'> Your account has been registered</p>}
+                    {success && navigate("/")}
                     <button disabled={isLoading} type="submit" id="signUpButton">Sign up</button>
                 </form>
             </div>
