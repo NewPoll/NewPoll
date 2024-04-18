@@ -52,6 +52,10 @@ const pollSchema = new Schema({
     multipleOptions: {
         type: Boolean,
         required: true
+    },
+    IPSVoted: {
+        type: Array,
+        required:true
     }
 })
 
