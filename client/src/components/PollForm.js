@@ -1,4 +1,5 @@
 import "./PollForm.css"
+import {useAuthContext} from "../hooks/useAuthContext.js"
 import { useState } from "react"
 function PollForm() {
     const [pollQuestion, setPollQuestion] = useState("");
@@ -7,7 +8,7 @@ function PollForm() {
     const [multipleVote, setMultipleVote] = useState(false);
     const [oneVotePerIP, setOneVotePerIP] = useState(false);
     const [showResults, setShowResults] = useState(false);
-
+    const {user} = useAuthContext()
 
     let temp = [...optionsContent];
    
@@ -24,11 +25,27 @@ function PollForm() {
         }
         
     }
+
+    const handleForm = async (event) => {
+        
+        event.preventDefault();
+        const response = await fetch ('http://localhost:5000/api/polls/createPoll' , {
+            method : 'POST',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults })
+        })
+        const json = await response.json()
+        
+    }
+
     return (
       
         <div id="pollBackground" style={{ height: 600 + 72 * temp.length + "px" }}>
             <p id="formTitle"> Make a new poll!</p>
-            <form id="form">
+            <form id="form" onSubmit={handleForm}>
                 <p className="textBoxLabel"> Poll Question</p>
                 <input onChange={(e) => setPollQuestion(e.target.value)} value={pollQuestion} placeholder="Type your question here" className="pollInput" type="text"></input>
                 <p className="textBoxLabel"> Options</p>
