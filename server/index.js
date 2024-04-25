@@ -10,6 +10,8 @@ app.use(express.json());
 app.use(cors());
 const auth = require ('./middleware/auth.js')
 
+const crypto = require('crypto');
+
 mongoose.connect(process.env.URI)
     .then(() => {
         console.log("database is running!");
@@ -40,17 +42,34 @@ app.post("/api/user/register", async function(req, res){
         res.status(400).json({error: e.message})
     }
 })
+
+app.post("/api/polls/retrievePoll", async function(req, res){
+   
+    const {pollID} = req.body;
+
+    let query = await Poll.retrievePoll(pollID);
+
+    try{
+        if(query){
+            res.status(200).json( query );
+        }
+    } catch(e){
+        
+        res.status(400).json({error: e.message})
+    }
+})
+
 app.use(auth);
+
 app.post("/api/polls/createPoll", async function(req, res){
    
     const {pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults} = req.body;
-    if (req.user==null) {
-        console.log("anonymous")
-    }
+    let pollID = crypto.randomUUID();
+
     try{
-        const token = await Poll.createPoll(req.user,pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults);
+        const token = await Poll.createPoll(req.user,pollID,pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults);
        
-        res.status(200).json({});
+        res.status(200).json({"pollID": pollID});
     } catch(e){
         
         res.status(400).json({error: e.message})

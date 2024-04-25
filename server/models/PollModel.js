@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const Schema = mongoose.Schema;
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const pollSchema = new Schema({
-    id: {
+    pollID: {
         type: String,
         required: true
     },
@@ -43,16 +43,13 @@ const pollSchema = new Schema({
     }
 })
 
-pollSchema.statics.createPoll = async function(user,pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults ){
-    
-   
-   
+pollSchema.statics.createPoll = async function(user,pollUUID,pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults ){
 
-   
     let optionSize = optionsContent.length
     let votesArr = new Array(optionSize).fill(0)
   
     const poll = this.create({
+        pollID: pollUUID,
         question: pollQuestion,
         optionsCount: optionSize,
         options: optionsContent,
@@ -63,15 +60,13 @@ pollSchema.statics.createPoll = async function(user,pollQuestion,optionsContent,
         IPsVoted:[]
     });
 
-    
-    
-
-    
-
     return;
 }
 
+pollSchema.statics.retrievePoll = async function(pID){
+    let findPollID = await this.findOne({pollID: pID});
 
-
+    return findPollID;
+}
 
 module.exports = mongoose.model("Poll", pollSchema);

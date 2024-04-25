@@ -29,16 +29,20 @@ function PollForm() {
     const handleForm = async (event) => {
         
         event.preventDefault();
+        let bearerToken = "null";  
+        if (user){
+            bearerToken = user.token;
+        }
         const response = await fetch ('http://localhost:5000/api/polls/createPoll' , {
             method : 'POST',
             headers: {
                 'Content-Type' : 'application/json',
-                'Authorization': `Bearer ${user.token}`
+                'Authorization': `Bearer ${bearerToken}`
             },
             body: JSON.stringify({pollQuestion,optionsContent,multipleVote,oneVotePerIP,showResults })
         })
         const json = await response.json()
-        
+        console.log(json);
     }
 
     return (

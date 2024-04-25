@@ -12,7 +12,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/register" element={<Register />}/> 
         <Route path="/login" element={<Login />}/> 
-        <Route path="/poll" element={<Poll />}/>
+        <Route path="/polls/:pollID" element={<Poll />}/>
       </Routes>
     </BrowserRouter>
   );
